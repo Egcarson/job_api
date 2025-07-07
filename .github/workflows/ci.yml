@@ -28,6 +28,9 @@ jobs:
           key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
           restore-keys: |
             ${{ runner.os }}-pip-
+            
+      - name: Load environment variables
+        run: cp .env.test .env
 
       - name: Install dependencies
         run: |
