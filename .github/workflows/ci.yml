@@ -29,8 +29,9 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pip-
             
-      - name: Load environment variables
-        run: cp .env.test .env
+      - name: Create .env file from secret
+        run: |
+          echo "${{ secrets.DOTENV_TEST_CONTENT }}" > .env
 
       - name: Install dependencies
         run: |
