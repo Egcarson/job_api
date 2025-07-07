@@ -1,0 +1,63 @@
+services:
+  app:
+    container_name: jobber-api
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    command: uvicorn src:app --host 0.0.0.0 --port 8000 --reload
+    volumes:
+      - .:/code
+    env_file:
+      - .env
+    depends_on:
+      - db
+      - redis
+
+  db:
+    image: postgres:15
+    container_name: postgres
+    restart: always
+    env_file:
+      - .env
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7
+    container_name: redis
+    ports:
+      - "6379:6379"
+    restart: always
+
+  celery_worker:
+    build:
+      context: .
+    container_name: celery_worker
+    command: celery -A src.celery_tasks.app worker --loglevel=info
+    volumes:
+      - .:/code
+    depends_on:
+      - app
+      - redis
+    env_file:
+      - .env
+
+  celery_beat:
+    build:
+      context: .
+    container_name: celery_beat
+    command: celery -A src.celery_tasks.app beat --loglevel=info
+    volumes:
+      - .:/code
+    depends_on:
+      - app
+      - redis
+    env_file:
+      - .env
+
+volumes:
+  postgres_data:
