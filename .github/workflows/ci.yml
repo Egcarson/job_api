@@ -16,6 +16,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Create .env file from secret
+        run: |
+          echo "${{ secrets.DOTENV_TEST_CONTENT }}" > .env
+
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
@@ -28,10 +32,6 @@ jobs:
           key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
           restore-keys: |
             ${{ runner.os }}-pip-
-            
-      - name: Create .env file from secret
-        run: |
-          echo "${{ secrets.DOTENV_TEST_CONTENT }}" > .env
 
       - name: Install dependencies
         run: |
@@ -48,4 +48,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: pytest-report
-          path: pytest-report.xml
+          path: ./src/pytest-report.xml
