@@ -18,7 +18,7 @@ jobs:
 
       - name: Create .env.test file from secret
         run: |
-          echo "${{ secrets.DOTENV_TEST_CONTENT }}" > .env.test
+          echo "${{ secrets.DOTENV_TEST_CONTENT }}" > src/.env.test
 
       - name: Set up Python
         uses: actions/setup-python@v4
