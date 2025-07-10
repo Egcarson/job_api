@@ -33,14 +33,14 @@ async def test_user_creation(fake_session, fake_user_service, test_client):
     assert response.json()["message"].startswith("Account has been created successfuly!")
 
 
-# def test_send_email(fake_celery, test_client):
-#     payload = {"addresses": ["user@example.com"]}
-#     response = test_client.post("/api/v1.0/send_email", json=payload)
+def test_send_email(fake_celery, test_client):
+    payload = {"addresses": ["user@example.com"]}
+    response = test_client.post("/api/v1.0/send_email", json=payload)
     
-#     assert response.status_code == status.HTTP_200_OK
-#     assert response.json() == {"message": "email sent successfully!"}
-#     # Ensure the celery mock was called
-#     auth_module.celery_worker.delay.assert_called_once()
+    assert response.status_code == status.HTTP_200_OK
+    assert response.json() == {"message": "email sent successfully!"}
+    # Ensure the celery mock was called
+    auth_module.celery_worker.delay.assert_called_once()
 
 
 def test_login_success(fake_user_service, test_client, fake_auth_helpers):
