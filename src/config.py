@@ -1,12 +1,17 @@
+import os
+from functools import lru_cache
 from pydantic_settings import BaseSettings, SettingsConfigDict
 from typing import Optional
 from pydantic import EmailStr
+
+env = os.getenv("ENV", "local")
+env_file = ".env.docker" if env == "docker" else ".env.local"
 
 class Settings(BaseSettings):
     DATABASE_URL: str
     JWT_SECRET: str
     JWT_ALGORITHM: str
-    REDIS_URL: str = "redis://localhost:6379/0"
+    REDIS_URL: str
     MAIL_USERNAME: str
     MAIL_PASSWORD: str
     MAIL_PORT: int = 587
@@ -20,11 +25,16 @@ class Settings(BaseSettings):
     DOMAIN: str
 
     model_config = SettingsConfigDict(
-        env_file=".env",
+        env_file=env_file,
         extra="ignore"
     )
 
-Config = Settings()
+
+@lru_cache
+def get_settings():
+    return Settings()
+
+Config = get_settings()
 
 broker_url = Config.REDIS_URL
 result_backend = Config.REDIS_URL

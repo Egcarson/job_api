@@ -10,7 +10,9 @@ services:
     volumes:
       - .:/code
     env_file:
-      - .env
+      - .env.docker
+    environment:
+      - ENV=docker
     depends_on:
       - db
       - redis
@@ -20,7 +22,9 @@ services:
     container_name: postgres
     restart: always
     env_file:
-      - .env
+      - .env.docker
+    environment:
+      - ENV=docker
     ports:
       - "5432:5432"
     volumes:
@@ -44,7 +48,9 @@ services:
       - app
       - redis
     env_file:
-      - .env
+      - .env.docker
+    environment:
+      - ENV=docker
 
   celery_beat:
     build:
@@ -57,7 +63,9 @@ services:
       - app
       - redis
     env_file:
-      - .env
+      - .env.docker
+    environment:
+      - ENV=docker
 
 volumes:
   postgres_data:

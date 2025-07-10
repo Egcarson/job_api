@@ -1,0 +1,75 @@
+[2025-07-07 21:16:40,968: ERROR/MainProcess] consumer: Cannot connect to redis://redis:6379/0: Error 11001 connecting to redis:6379. getaddrinfo failed..
+Trying again in 2.00 seconds... (1/100)
+
+[2025-07-07 21:16:45,256: ERROR/MainProcess] consumer: Cannot connect to redis://redis:6379/0: Error 11001 connecting to redis:6379. getaddrinfo failed..
+Trying again in 4.00 seconds... (2/100)
+
+[2025-07-07 21:16:51,536: ERROR/MainProcess] consumer: Cannot connect to redis://redis:6379/0: Error 11001 connecting to redis:6379. getaddrinfo failed..
+Trying again in 6.00 seconds... (3/100)
+
+[2025-07-07 21:16:59,843: ERROR/MainProcess] consumer: Cannot connect to redis://redis:6379/0: Error 11001 connecting to redis:6379. getaddrinfo failed..
+Trying again in 8.00 seconds... (4/100)
+
+[2025-07-07 21:17:10,128: ERROR/MainProcess] consumer: Cannot connect to redis://redis:6379/0: Error 11001 connecting to redis:6379. getaddrinfo failed..
+Trying again in 10.00 seconds... (5/100)
+
+[2025-07-07 21:17:22,440: ERROR/MainProcess] consumer: Cannot connect to redis://redis:6379/0: Error 11001 connecting to redis:6379. getaddrinfo failed..
+Trying again in 12.00 seconds... (6/100)
+
+[2025-07-07 21:17:36,732: ERROR/MainProcess] consumer: Cannot connect to redis://redis:6379/0: Error 11001 connecting to redis:6379. getaddrinfo failed..
+Trying again in 14.00 seconds... (7/100)
+
+[2025-07-07 21:17:53,052: ERROR/MainProcess] consumer: Cannot connect to redis://redis:6379/0: Error 11001 connecting to redis:6379. getaddrinfo failed..
+Trying again in 16.00 seconds... (8/100)
+
+[2025-07-07 21:18:11,373: ERROR/MainProcess] consumer: Cannot connect to redis://redis:6379/0: Error 11001 connecting to redis:6379. getaddrinfo failed..
+Trying again in 18.00 seconds... (9/100)
+
+[2025-07-07 21:18:31,721: ERROR/MainProcess] consumer: Cannot connect to redis://redis:6379/0: Error 11001 connecting to redis:6379. getaddrinfo failed..
+Trying again in 20.00 seconds... (10/100)
+
+[2025-07-07 21:18:54,070: ERROR/MainProcess] consumer: Cannot connect to redis://redis:6379/0: Error 11001 connecting to redis:6379. getaddrinfo failed..
+Trying again in 22.00 seconds... (11/100)
+
+[2025-07-07 21:19:18,383: ERROR/MainProcess] consumer: Cannot connect to redis://redis:6379/0: Error 11001 connecting to redis:6379. getaddrinfo failed..
+Trying again in 24.00 seconds... (12/100)
+
+[2025-07-07 21:19:44,737: ERROR/MainProcess] consumer: Cannot connect to redis://redis:6379/0: Error 11001 connecting to redis:6379. getaddrinfo failed..
+Trying again in 26.00 seconds... (13/100)
+
+[2025-07-07 21:20:13,097: ERROR/MainProcess] consumer: Cannot connect to redis://redis:6379/0: Error 11001 connecting to redis:6379. getaddrinfo failed..
+Trying again in 28.00 seconds... (14/100)
+
+[2025-07-07 21:20:43,447: ERROR/MainProcess] consumer: Cannot connect to redis://redis:6379/0: Error 11001 connecting to redis:6379. getaddrinfo failed..
+Trying again in 30.00 seconds... (15/100)
+
+[2025-07-07 21:21:15,941: ERROR/MainProcess] consumer: Cannot connect to redis://redis:6379/0: Error 11001 connecting to redis:6379. getaddrinfo failed..
+Trying again in 32.00 seconds... (16/100)
+
+[2025-07-07 21:21:50,303: ERROR/MainProcess] consumer: Cannot connect to redis://redis:6379/0: Error 11001 connecting to redis:6379. getaddrinfo failed..
+Trying again in 32.00 seconds... (16/100)
+
+[2025-07-07 21:22:24,625: ERROR/MainProcess] consumer: Cannot connect to redis://redis:6379/0: Error 11001 connecting to redis:6379. getaddrinfo failed..
+Trying again in 32.00 seconds... (16/100)
+
+[2025-07-07 21:22:58,952: ERROR/MainProcess] consumer: Cannot connect to redis://redis:6379/0: Error 11001 connecting to redis:6379. getaddrinfo failed..
+Trying again in 32.00 seconds... (16/100)
+
+[2025-07-07 21:23:33,341: ERROR/MainProcess] consumer: Cannot connect to redis://redis:6379/0: Error 11001 connecting to redis:6379. getaddrinfo failed..
+Trying again in 32.00 seconds... (16/100)
+
+[2025-07-07 21:24:07,687: ERROR/MainProcess] consumer: Cannot connect to redis://redis:6379/0: Error 11001 connecting to redis:6379. getaddrinfo failed..
+Trying again in 32.00 seconds... (16/100)
+
+[2025-07-07 21:24:42,049: ERROR/MainProcess] consumer: Cannot connect to redis://redis:6379/0: Error 11001 connecting to redis:6379. getaddrinfo failed..
+Trying again in 32.00 seconds... (16/100)
+
+[2025-07-07 21:25:16,393: ERROR/MainProcess] consumer: Cannot connect to redis://redis:6379/0: Error 11001 connecting to redis:6379. getaddrinfo failed..
+Trying again in 32.00 seconds... (16/100)
+
+[2025-07-07 21:25:50,739: ERROR/MainProcess] consumer: Cannot connect to redis://redis:6379/0: Error 11001 connecting to redis:6379. getaddrinfo failed..
+Trying again in 32.00 seconds... (16/100)
+
+[2025-07-10 08:03:12,423: ERROR/MainProcess] consumer: Cannot connect to redis://redis:6379/0: Error 11001 connecting to redis:6379. getaddrinfo failed..
+Trying again in 32.00 seconds... (16/100)
+
