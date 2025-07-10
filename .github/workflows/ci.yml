@@ -16,9 +16,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Create .env file from secret
+      - name: Create .env.test file from secret
         run: |
-          echo "${{ secrets.DOTENV_TEST_CONTENT }}" > .env
+          echo "${{ secrets.DOTENV_TEST_CONTENT }}" > .env.test
 
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -38,9 +38,10 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Run tests with pytest
+      - name: Load .env.test and run tests
         run: |
-          pytest -v --disable-warnings --junitxml=pytest-report.xml
+          pip install python-dotenv
+          dotenv -f .env.test run pytest -v --disable-warnings --junitxml=pytest-report.xml
         working-directory: ./src
 
       - name: Upload test report

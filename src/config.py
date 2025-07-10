@@ -5,7 +5,12 @@ from typing import Optional
 from pydantic import EmailStr
 
 env = os.getenv("ENV", "local")
-env_file = ".env.docker" if env == "docker" else ".env.local"
+if env == "docker":
+    env_file = ".env.docker"
+elif env == "test":
+    env_file = ".env.test"
+else:
+    env_file = ".env.local"
 
 class Settings(BaseSettings):
     DATABASE_URL: str
