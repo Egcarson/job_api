@@ -5,6 +5,8 @@ from typing import Optional
 from pydantic import EmailStr
 
 env = os.getenv("ENV", "local")
+
+#this logic is to load environments for local, docker and ci - test
 if env == "docker":
     env_file = ".env.docker"
 elif env == "test":
