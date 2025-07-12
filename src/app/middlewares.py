@@ -34,5 +34,5 @@ def register_all_middlewares(app: FastAPI):
     
     app.add_middleware(
         TrustedHostMiddleware,
-        allowed_hosts=["https://www.google.com/", "localhost", "127.0.0.1", "testserver"]
+        allowed_hosts=["job-api-x6gh.onrender.com/", "localhost", "127.0.0.1", "testserver", "*.onrender.com"]
         )

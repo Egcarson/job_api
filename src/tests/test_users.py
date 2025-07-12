@@ -5,8 +5,8 @@ from src.app.router import users as users_module
 from uuid import uuid4, UUID
 from src.app.auth.dependencies import access_token_bearer
 from src import app
-# from src.app.schemas import UserRoles
 
+BASE_URL = f"/api/v1"
 user_uid = uuid4()
 fake_user = {
     "first_name": "test1",
@@ -84,7 +84,7 @@ async def test_get_all_users(fake_session, test_client, monkeypatch):
     # monkeypatch.setattr("src.app.router.users.user_service", mock_service)
 
     # Act
-    response = test_client.get("/api/v1.0/users")  # Adjust base path if needed
+    response = test_client.get(f"{BASE_URL}/users")  # Adjust base path if needed
 
     # Assert
     assert response.status_code == 200
@@ -103,7 +103,7 @@ async def test_get_all_users_with_role(fake_session, test_client, monkeypatch):
     role_param = "USER"
 
     # Act
-    response = test_client.get(f"/api/v1.0/users?role={role_param}")
+    response = test_client.get(f"{BASE_URL}/users?role={role_param}")
 
     # Assert
     assert response.status_code == 200
@@ -123,7 +123,7 @@ async def test_get_all_users_error(fake_session, test_client, monkeypatch):
     role_param = "UER"
 
     # Act
-    response = test_client.get(f"/api/v1.0/users?role={role_param}")
+    response = test_client.get(f"{BASE_URL}/users?role={role_param}")
 
     # Assert
     assert response.status_code == status.HTTP_422_UNPROCESSABLE_ENTITY
@@ -140,7 +140,7 @@ async def test_get_user(fake_session, test_client, monkeypatch):
     app.dependency_overrides[access_token_bearer] = lambda: {"user_uid": user_uid}
 
     # Act
-    response = test_client.get(f"/api/v1.0/users/{user_uid}")
+    response = test_client.get(f"{BASE_URL}/users/{user_uid}")
 
     # Assert
     assert response.status_code == 200
@@ -161,7 +161,7 @@ async def test_get_user_invalid_token(fake_session, test_client, monkeypatch):
     app.dependency_overrides[access_token_bearer] = lambda: {"user_uid": user_uid}
 
     # Act
-    response = test_client.get(f"/api/v1.0/users/b5ea4517-3c2a-4c3b-ae8a-fb6zz283ad90")
+    response = test_client.get(f"{BASE_URL}/users/b5ea4517-3c2a-4c3b-ae8a-fb6zz283ad90")
     print({"response": response.json()}) 
     # Assert
     assert response.status_code == status.HTTP_422_UNPROCESSABLE_ENTITY
@@ -179,7 +179,7 @@ async def test_get_user_not_found(fake_session, test_client, monkeypatch):
     app.dependency_overrides[access_token_bearer] = lambda: {"user_uid": fake_uid}
 
     # Act
-    response = test_client.get(f"/api/v1.0/users/{fake_uid}")
+    response = test_client.get(f"{BASE_URL}/users/{fake_uid}")
     
     # Assert
     assert response.status_code == status.HTTP_404_NOT_FOUND
@@ -205,7 +205,7 @@ async def test_update_user_success(fake_session, test_client, monkeypatch):
 
     app.dependency_overrides[users_module.access_token_bearer] = lambda: {"user": {"user_uid": str(current_user)}}
 
-    response = test_client.put(f"/api/v1.0/users/{user_uid}", json=payload)
+    response = test_client.put(f"{BASE_URL}/users/{user_uid}", json=payload)
 
     assert response.status_code == status.HTTP_202_ACCEPTED
     data = response.json()
@@ -231,7 +231,7 @@ async def test_update_user_not_found(fake_session, test_client, monkeypatch):
 
     app.dependency_overrides[access_token_bearer] = lambda: {"user": {"user_uid": str(user_uid)}}
 
-    response = test_client.put(f"/api/v1.0/users/{user_uid}", json=payload)
+    response = test_client.put(f"{BASE_URL}/users/{user_uid}", json=payload)
 
     assert response.status_code == status.HTTP_404_NOT_FOUND
     data = response.json()
@@ -253,7 +253,7 @@ async def test_update_user_not_authorized(fake_session, test_client, monkeypatch
 
     app.dependency_overrides[access_token_bearer] = lambda: {"user": {"user_uid": str(user_uid)}}
 
-    response = test_client.put(f"/api/v1.0/users/{user_uid}", json=payload)
+    response = test_client.put(f"{BASE_URL}/users/{user_uid}", json=payload)
 
     assert response.status_code == status.HTTP_401_UNAUTHORIZED
     data = response.json()
@@ -276,7 +276,7 @@ async def test_delete_user_success(fake_session, test_client, monkeypatch):
 
     app.dependency_overrides[access_token_bearer] = lambda: {"user": {"user_uid": str(user_uid)}}
 
-    response = test_client.delete(f"/api/v1.0/users/{user_uid}")
+    response = test_client.delete(f"{BASE_URL}/users/{user_uid}")
 
     assert response.status_code == status.HTTP_204_NO_CONTENT
     mock_service.get_user.assert_awaited_once_with(user_uid, fake_session)
@@ -294,7 +294,7 @@ async def test_delete_user_not_found(fake_session, test_client, monkeypatch):
 
     app.dependency_overrides[access_token_bearer] = lambda: {"user": {"user_uid": str(user_uid)}}
 
-    response = test_client.delete(f"/api/v1.0/users/{user_uid}")
+    response = test_client.delete(f"{BASE_URL}/users/{user_uid}")
 
     assert response.status_code == status.HTTP_404_NOT_FOUND
     data = response.json()
@@ -316,7 +316,7 @@ async def test_delete_user_not_authorized(fake_session, test_client, monkeypatch
 
     app.dependency_overrides[access_token_bearer] = lambda: {"user": {"user_uid": str(user_uid)}}
 
-    response = test_client.delete(f"/api/v1.0/users/{user_uid}")
+    response = test_client.delete(f"{BASE_URL}/users/{user_uid}")
 
     assert response.status_code == status.HTTP_401_UNAUTHORIZED
     data = response.json()

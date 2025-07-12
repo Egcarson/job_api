@@ -61,7 +61,7 @@ async def signup(user_data: schemas.UserCreate, bg_tasks: BackgroundTasks, sessi
 
     token = create_url_safe_token({"email": email})
 
-    link = f"http://{Config.DOMAIN}/api/v1.0/auth/verify_email/{token}"
+    link = f"http://{Config.DOMAIN}/api/v1/auth/verify_email/{token}"
 
     html_message =f"""
     <h1>Verify your Email Address</h1>
@@ -199,7 +199,7 @@ async def password_reset_request(email_data: schemas.PasswordResetRequest):
 
     token = create_url_safe_token({"email": email})
 
-    link = f"http://{Config.DOMAIN}/api/v1.0/auth/confirm-password-reset/{token}"
+    link = f"http://{Config.DOMAIN}/api/v1/auth/confirm-password-reset/{token}"
 
     html_message =f"""
     <h1>Reset your Password</h1>

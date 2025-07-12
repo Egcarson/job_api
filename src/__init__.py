@@ -16,7 +16,7 @@ async def life_span(app: FastAPI):
     print(f"sever is shutting down ..........")
     print(f"sever has been stopped")
 
-version = "v1.0"
+version = "v1"
 
 app = FastAPI(
     title="Jobberman API",

@@ -11,6 +11,7 @@ from datetime import datetime
 from src.tests.conftest import FAKE_USER_UID
 
 
+BASE_URL = f"/api/v1"
 job_uid = uuid4()
 fake_job_data = [
     {
@@ -74,7 +75,7 @@ async def test_get_all_jobs(fake_session, test_client, monkeypatch, skip: int=0,
     monkeypatch.setattr(job_module, "job_service", mock_service)
 
     # Act
-    response = test_client.get("/api/v1.0/jobs?skip=0&limit=10")
+    response = test_client.get(f"{BASE_URL}/jobs?skip=0&limit=10")
 
     # Assert
     assert response.status_code == status.HTTP_200_OK
@@ -91,7 +92,7 @@ async def test_get_all_jobs_with_roles(fake_session, test_client, monkeypatch, s
     monkeypatch.setattr(job_module,"job_service", mock_service)
 
     # Act
-    response = test_client.get(f"/api/v1.0/jobs?skip=0&limit=10&role=HYBRID")
+    response = test_client.get(f"{BASE_URL}/jobs?skip=0&limit=10&role=HYBRID")
 
 
     # Assert
@@ -110,7 +111,7 @@ async def test_get_job(fake_session, test_client, monkeypatch):
     monkeypatch.setattr(job_module,"job_service", mock_service)
 
     # Act
-    response = test_client.get(f"/api/v1.0/jobs/{fake_job_id}")
+    response = test_client.get(f"{BASE_URL}/jobs/{fake_job_id}")
 
     # Assert
     assert response.status_code == status.HTTP_200_OK
@@ -131,7 +132,7 @@ async def test_get_job_not_found(fake_session, test_client, monkeypatch):
     monkeypatch.setattr(job_module,"job_service", mock_service)
 
     # Act
-    response = test_client.get(f"/api/v1.0/jobs/{fake_id}")
+    response = test_client.get(f"{BASE_URL}/jobs/{fake_id}")
    
     # Assert
     assert response.status_code == status.HTTP_404_NOT_FOUND
@@ -168,7 +169,7 @@ async def test_job_create_success(fake_session, test_client, monkeypatch):
 
     job_create_data = JobCreate(**job_payload)
 
-    response = test_client.post(f"/api/v1.0/jobs", json=job_payload)
+    response = test_client.post(f"{BASE_URL}/jobs", json=job_payload)
    
     assert response.status_code == status.HTTP_201_CREATED
     assert mock_service.create_job_called_once()
@@ -205,7 +206,7 @@ async def test_update_job_success(fake_session, test_client, monkeypatch):
 
     # Act
     response = test_client.put(
-        f"/api/v1.0/jobs/{fake_job_uid}",
+        f"{BASE_URL}/jobs/{fake_job_uid}",
         json=update_payload
     )
 
@@ -234,7 +235,7 @@ async def test_update_job_not_found(fake_session, test_client, monkeypatch):
     monkeypatch.setattr(job_module, "job_service", mock_service)
 
     # Act
-    response = test_client.put(f"/api/v1.0/jobs/{fake_job_uid}", json= update_payload)
+    response = test_client.put(f"{BASE_URL}/jobs/{fake_job_uid}", json= update_payload)
 
     # Assert
     assert response.status_code == status.HTTP_404_NOT_FOUND
@@ -260,7 +261,7 @@ async def test_update_job_unauthorized_user(fake_session, test_client, monkeypat
     monkeypatch.setattr(job_module, "job_service", mock_service)
 
     # Act
-    response = test_client.put(f"/api/v1.0/jobs/{fake_job_uid}", json=update_payload)
+    response = test_client.put(f"{BASE_URL}/jobs/{fake_job_uid}", json=update_payload)
     print(response.json())
 
     # Assert
@@ -289,7 +290,7 @@ async def test_delete_job_success(fake_session, test_client, monkeypatch):
     monkeypatch.setattr(job_module, "job_service", mock_service)
 
     # Act
-    response = test_client.delete(f"/api/v1.0/jobs/{fake_job_uid}")
+    response = test_client.delete(f"{BASE_URL}/jobs/{fake_job_uid}")
 
     # Assert
     assert response.status_code == status.HTTP_204_NO_CONTENT

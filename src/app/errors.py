@@ -277,7 +277,7 @@ def register_all_errors(app: FastAPI):
         else:
             #No active token, create and send
             new_token = create_url_safe_token({"email": user_email})
-            verification_link = f"http://{Config.DOMAIN}/api/v1.0/auth/verify_email/{new_token}"
+            verification_link = f"http://{Config.DOMAIN}/api/v1/auth/verify_email/{new_token}"
 
             html_message = f"""
             <h1>Verify your Email Address</h1>

@@ -66,7 +66,7 @@ async def test_get_applications(fake_session, test_client, monkeypatch):
     monkeypatch.setattr(app_module, "apps", mock_service)
 
     #response
-    response = test_client.get(url="/api/v1.0/applications")
+    response = test_client.get(url="/api/v1/applications")
     print(response.json())
 
     assert response.status_code == status.HTTP_200_OK
@@ -89,7 +89,7 @@ async def test_get_job_applications_success(fake_session, test_client, monkeypat
     monkeypatch.setattr(app_module, "apps", mock_app_service)
     monkeypatch.setattr(app_module, "job_service", mock_job_service)
 
-    response = test_client.get(url=f"/api/v1.0/applications/list/{fake_job_uid}")
+    response = test_client.get(url=f"/api/v1/applications/list/{fake_job_uid}")
 
     assert response.status_code == status.HTTP_200_OK
     data = response.json()
@@ -109,7 +109,7 @@ async def test_get_job_applications_not_found(fake_session, test_client, monkeyp
     #patch mock_service to the actual application_service
     monkeypatch.setattr(app_module, "job_service", mock_job_service)
 
-    response = test_client.get(url=f"/api/v1.0/applications/list/{another_job_id}")
+    response = test_client.get(url=f"/api/v1/applications/list/{another_job_id}")
 
     print(response.json())
 
@@ -148,7 +148,7 @@ async def test_create_application_success(fake_session, test_client, monkeypatch
 
     apps_create = ApplicationCreate(**app_create_payload)
 
-    response = test_client.post(url=f"/api/v1.0/applications?job_id={create_job_id}", json=app_create_payload)
+    response = test_client.post(url=f"/api/v1/applications?job_id={create_job_id}", json=app_create_payload)
 
     assert response.status_code == status.HTTP_201_CREATED
     data = response.json()
@@ -186,7 +186,7 @@ async def test_create_application_not_found(fake_session, test_client, monkeypat
 
     apps_create = ApplicationCreate(**app_create_payload)
 
-    response = test_client.post(url=f"/api/v1.0/applications?job_id={another_job_id}", json=app_create_payload)
+    response = test_client.post(url=f"/api/v1/applications?job_id={another_job_id}", json=app_create_payload)
 
     assert response.status_code == status.HTTP_404_NOT_FOUND
     data = response.json()
@@ -212,7 +212,7 @@ async def test_get_user_applications(fake_session, test_client, monkeypatch):
 
     monkeypatch.setattr(app_module, "apps", mock_service)
 
-    response = test_client.get(url="http://localhost:8000/api/v1.0/applications/list")
+    response = test_client.get(url="http://localhost:8000/api/v1/applications/list")
 
     assert response.status_code == status.HTTP_200_OK
     data = response.json()
@@ -232,7 +232,7 @@ async def test_get_application_success(fake_session, test_client, monkeypatch):
     #patch the real service to the mocked service
     monkeypatch.setattr(app_module, "apps", mock_service)
 
-    response = test_client.get(url=f"http://localhost:8000/api/v1.0/applications/{fake_app_uid}?application_id={fake_app_uid}")
+    response = test_client.get(url=f"http://localhost:8000/api/v1/applications/{fake_app_uid}?application_id={fake_app_uid}")
 
 
     assert response.status_code == status.HTTP_200_OK
@@ -256,7 +256,7 @@ async def test_get_application_not_found(fake_session, test_client, monkeypatch)
     #patch the real service to the mocked service
     monkeypatch.setattr(app_module, "apps", mock_service)
 
-    response = test_client.get(url=f"http://localhost:8000/api/v1.0/applications/{error_uid}?application_id={error_uid}")
+    response = test_client.get(url=f"http://localhost:8000/api/v1/applications/{error_uid}?application_id={error_uid}")
 
 
     assert response.status_code == status.HTTP_404_NOT_FOUND
@@ -292,7 +292,7 @@ async def test_update_application_success(fake_session, test_client, monkeypatch
     #making patch of the mocked service to actual job_service
     monkeypatch.setattr(app_module, "apps", mock_service)
 
-    response = test_client.put(url=f"api/v1.0/applications/{fake_app_uid}?application_id={fake_app_uid}", json=update_payload)
+    response = test_client.put(url=f"api/v1/applications/{fake_app_uid}?application_id={fake_app_uid}", json=update_payload)
 
     assert response.status_code == status.HTTP_202_ACCEPTED
     data = response.json()
@@ -325,7 +325,7 @@ async def test_update_application_not_found(fake_session, test_client, monkeypat
     #making patch of the mocked service to actual job_service
     monkeypatch.setattr(app_module, "apps", mock_service)
 
-    response = test_client.put(url=f"api/v1.0/applications/{fake_app_uid}?application_id={fake_app_uid}", json=update_payload)
+    response = test_client.put(url=f"api/v1/applications/{fake_app_uid}?application_id={fake_app_uid}", json=update_payload)
 
     assert response.status_code == status.HTTP_404_NOT_FOUND
     data = response.json()
@@ -347,7 +347,7 @@ async def test_delete_application_success(fake_session, test_client, monkeypatch
 
     monkeypatch.setattr(app_module, "apps", mock_service)
 
-    response = test_client.delete(url=f"api/v1.0/applications/{fake_app_uid}?application_id={fake_app_uid}")
+    response = test_client.delete(url=f"api/v1/applications/{fake_app_uid}?application_id={fake_app_uid}")
 
     assert response.status_code == status.HTTP_204_NO_CONTENT
 
@@ -366,7 +366,7 @@ async def test_delete_application_not_found(fake_session, test_client, monkeypat
 
     monkeypatch.setattr(app_module, "apps", mock_service)
 
-    response = test_client.delete(url=f"api/v1.0/applications/{fake_app_uid}?application_id={fake_app_uid}")
+    response = test_client.delete(url=f"api/v1/applications/{fake_app_uid}?application_id={fake_app_uid}")
 
     assert response.status_code == status.HTTP_404_NOT_FOUND
 

@@ -4,7 +4,7 @@ from unittest.mock import Mock
 from src.app.schemas import UserCreate
 from src.app.auth import auth as auth_module
 
-BASE_URL = f"/api/v1.0"
+BASE_URL = f"/api/v1"
 
 @pytest.mark.asyncio
 async def test_user_creation(fake_session, fake_user_service, test_client):
@@ -35,7 +35,7 @@ async def test_user_creation(fake_session, fake_user_service, test_client):
 
 def test_send_email(fake_celery, test_client):
     payload = {"addresses": ["user@example.com"]}
-    response = test_client.post("/api/v1.0/send_email", json=payload)
+    response = test_client.post(f"{BASE_URL}/send_email", json=payload)
     
     assert response.status_code == status.HTTP_200_OK
     assert response.json() == {"message": "email sent successfully!"}
@@ -54,7 +54,7 @@ def test_login_success(fake_user_service, test_client, fake_auth_helpers):
 
     payload = {"email_address": "user@example.com", "password": "correct"}
 
-    response = test_client.post("/api/v1.0/login", json=payload)
+    response = test_client.post(f"{BASE_URL}/login", json=payload)
 
     assert response.status_code == status.HTTP_200_OK
     data = response.json()
@@ -69,7 +69,7 @@ def test_login_invalid_email(fake_user_service, test_client):
 
     payload = {"email_address": "no_user@example.com", "password": "anything"}
 
-    response = test_client.post("/api/v1.0/login", json=payload)
+    response = test_client.post(f"{BASE_URL}/login", json=payload)
 
     assert response.status_code == status.HTTP_400_BAD_REQUEST
 
@@ -85,6 +85,6 @@ def test_login_wrong_password(fake_user_service, test_client, monkeypatch):
 
     payload = {"email_address": "user@example.com", "password": "wrong"}
 
-    response = test_client.post("/api/v1.0/login", json=payload)
+    response = test_client.post(f"{BASE_URL}/login", json=payload)
 
     assert response.status_code == status.HTTP_400_BAD_REQUEST
